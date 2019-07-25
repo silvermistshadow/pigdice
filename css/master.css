@@ -1,0 +1,20 @@
+.displayPlayers {
+  display: inline-block;
+  font-size: 24px;
+  padding-left: 24px;
+  padding-right: 24px;
+  border-style: solid;
+  border-width: thick;
+}
+
+#player1 {
+  border-color: blue;
+  margin-left: 12px;
+  margin-right: 128px;
+}
+
+#player2 {
+  border-color: red;
+  margin-left: 128px;
+  margin-right: 12px;
+}

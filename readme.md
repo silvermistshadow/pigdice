@@ -20,6 +20,7 @@ Design stages:
 0. Backend needs a random number generator (acquired)
 1. Dice rolling function calls the previous thing
 2. Establish game object, rules and prototypes
+3. Switch turns on certain conditions
 
 
 ## Setup/Installation Requirements
