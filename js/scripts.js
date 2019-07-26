@@ -5,22 +5,18 @@ function getRandomIntInclusive(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive
 }
 
-function Game(Players) {
-  this.Players = Players;
+function Game(player) {
+  this.Player = Player[];
 
 };
 
-function Players(p1, p2) {
-  this.p1 = p1;
-  this.p2 = p2;
-
+function Player() {
+  this.name
+  this.score
+  this.turns
 };
 
-Game.prototype.displayPlayers = function() {
-  $("game").show();
-  $("#player1").prepend(this.p1);
-  $("#player2").prepend(this.p2);
-}
+
 
 Game.prototype.playerTurns = function() {
   var numRolledP1 = [];
@@ -30,7 +26,8 @@ Game.prototype.playerTurns = function() {
   var turnScoreP1;
   var turnScoreP2;
   var currentTurn = "P1";
-  $("button#rollP2").prop('disabled', true)
+  $("button#rollP2").prop('disabled', true);
+  $("button#holdP2").prop('disabled', true);
   function switchTurns() {
     if (currentTurn === "P1") {
       $("button#rollP1").prop('disabled', true);
@@ -75,6 +72,7 @@ Game.prototype.playerTurns = function() {
       else {
         $("#holdError").show();
       }
+      currentTurn = switchTurns();
     });
     $("#game").on("click", "button#rollP2", function() {
       $("#holdError").hide();
@@ -100,18 +98,20 @@ Game.prototype.playerTurns = function() {
       else {
         $("#holdError").show();
       }
-    };
+      currentTurn = switchTurns();
+    });
 };
 
+Player.prototype.playerInit = function(name) {
+  this.name = name;
+  this.score = 0;
+  this.turns = 0;
+}
 
-
-
-
-
-
-
-
-
+var player1 = new Player();
+var player2 = new Player();
+var playerArray = [player1, player2];
+var newGame = new Game(playerArray);
 
 //UI
 $(document).ready(function() {
@@ -120,9 +120,8 @@ $(document).ready(function() {
     event.preventDefault();
     var inputP1 = $("input#nameP1").val();
     var inputP2 = $("input#nameP2").val();
-
-    var players = new Players(inputP1, inputP2);
-    var newGame = new Game(players)
-    newGame.displayPlayers();
+    $("game").show();
+    $("#player1").prepend(inputP1);
+    $("#player2").prepend(inputP2);
   });
 });
