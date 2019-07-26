@@ -18,3 +18,7 @@
   margin-left: 128px;
   margin-right: 12px;
 }
+
+#holdError {
+  display: none;
+}

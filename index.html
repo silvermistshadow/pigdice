@@ -13,18 +13,34 @@
       <h2>A game of pig dice</h2>
       <p>This is a game of Pig Dice for two players. You'll have to take turns with the mouse.</p>
       <p>A game against the computer will be implemented Soon™</p>
+      <form id="playersInput">
+        <p>First, put in the names of who will be playing.</p>
+        <div class="form-group">
+          <label for="nameP1">Player 1:</label>
+          <input type="text" class="form-control" id="nameP1">
+        </div>
+        <div class="form-group">
+          <label for="nameP2">Player 2:</label>
+          <input type="text" class="form-control" id="nameP2">
+        </div>
+      </form>
+
       <div id="game">
         <div class="displayPlayers" id="player1">
           TEST
           <br>
-          <button type="button" class="btn" id="rollP1">Roll</button>
+          <button type="button" class="btn btn-primary" id="rollP1">Roll</button>
+          <button type="button" class="btn btn-success" id="holdP1">Hold</button>
         </div>
         <div class="displayPlayers" id="player2">
           TEST
           <br>
-          <button type="button" class="btn" id="rollP2">Roll</button>
+          <button type="button" class="btn btn-primary" id="rollP2">Roll</button>
+          <button type="button" class="btn btn-success" id="holdP2">Hold</button>
         </div>
-
+        <div class="holdError">
+          You have to roll at least once before holding.
+        </div>
 
       </div>
 
