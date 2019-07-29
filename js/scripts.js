@@ -125,16 +125,16 @@ var newGame = new Game(playerArray);
 
 //UI
 function displayScore() {
-  $("#p1Score").text(player1.score);
-  $("#p1Turns").text(player1.turns);
-  $("#p2Score").text(player2.score);
-  $("p2Turns").text(player2.turns);
+  $("#p1Score").html(player1.score);
+  $("#p1Turns").html(player1.turns);
+  $("#p2Score").html(player2.score);
+  $("#p2Turns").html(player2.turns);
 
 }
 
 
 $(document).ready(function() {
-  displayScore();
+
   $("form#playersInput").show()
   $("#holdError").hide();
   $("form#playersInput").submit(function(event) {
@@ -148,5 +148,6 @@ $(document).ready(function() {
     player1.playerInit(inputP1);
     player2.playerInit(inputP2)
   });
+  displayScore();
 
 });
