@@ -1,4 +1,5 @@
 //Back end
+//this function is from a post on StackExchange
 function getRandomIntInclusive(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
@@ -123,5 +124,8 @@ $(document).ready(function() {
     $("game").show();
     $("#player1").prepend(inputP1);
     $("#player2").prepend(inputP2);
+    player1.playerInit(inputP1);
+    player2.playerInit(inputP2)
+    
   });
 });
