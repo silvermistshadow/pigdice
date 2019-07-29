@@ -28,12 +28,14 @@ Game.prototype.playerTurns = function() {
       $("button#holdP1").prop('disabled', true);
       $("button#rollP2").prop('disabled', false);
       $("button#holdP2").prop('disabled', false);
+      console.log("I have opened the mayor");
       return currentTurn = "P2";
     } else if (currentTurn === "P2") {
       $("button#rollP2").prop('disabled', true);
       $("button#holdP2").prop('disabled', true);
       $("button#rollP1").prop('disabled', false);
       $("button#holdP1").prop('disabled', false);
+      console.log("When the power drops");
       return currentTurn = "P1";
     }
     else {
@@ -51,6 +53,7 @@ Game.prototype.diceRoller = function() {
   var turnScoreP2;
   $("#game").on("click", "button#rollP1", function() {
     $("#holdError").hide();
+    console.log("I want you to go in and go in and go in");
     var currentNum = getRandomIntInclusive(1, 6);
     if (currentNum !== 1) {
         numRolledP1.push(currentNum);
@@ -60,6 +63,7 @@ Game.prototype.diceRoller = function() {
     }
     });
   $("#game").on("click", "button#holdP1", function() {
+    console.log("like the US Marshall and his three daughters");
     if (numRolledP1.length >= 1) {
       currentTurn = switchTurns();
       player1.turns += 1;
@@ -125,12 +129,12 @@ var newGame = new Game(playerArray);
 
 //UI
 function displayScore() {
-  $("#p1Score").html(player1.score);
-  $("#p1Turns").html(player1.turns);
-  $("#p2Score").html(player2.score);
-  $("#p2Turns").html(player2.turns);
-
-}
+  $("#p1Score").html('Score:' + ' ' + player1.score);
+  $("#p1Turns").html('Turns:' + ' ' + player1.turns);
+  $("#p2Score").html('Score:' + ' ' + player2.score);
+  $("#p2Turns").html('Turns:' + ' ' + player2.turns);
+  console.log("And we lose the vaccine");
+};
 
 
 $(document).ready(function() {
@@ -147,7 +151,8 @@ $(document).ready(function() {
     $("#p2Name").text(inputP2);
     player1.playerInit(inputP1);
     player2.playerInit(inputP2)
+    displayScore();
   });
-  displayScore();
+
 
 });
