@@ -51,6 +51,7 @@ Game.prototype.diceRoller = function() {
   var totalP2 = [];
   var turnScoreP1;
   var turnScoreP2;
+  this.playerTurns();
   $("#game").on("click", "button#rollP1", function() {
     $("#holdError").hide();
     console.log("I want you to go in and go in and go in");
@@ -59,13 +60,13 @@ Game.prototype.diceRoller = function() {
         numRolledP1.push(currentNum);
     }
     else {
-        currentTurn = switchTurns();
+        currentTurn = playerTurns.call(this.switchTurns());
     }
     });
   $("#game").on("click", "button#holdP1", function() {
     console.log("like the US Marshall and his three daughters");
     if (numRolledP1.length >= 1) {
-      currentTurn = switchTurns();
+      currentTurn = playerTurns.call(this.switchTurns());
       player1.turns += 1;
       turnScoreP1 = numRolledP1.reduce((a, b) => a + b, 0);
       if (totalP1 >= 1) {
@@ -81,7 +82,6 @@ Game.prototype.diceRoller = function() {
     else {
       $("#holdError").show();
     }
-    currentTurn = switchTurns();
     });
   $("#game").on("click", "button#rollP2", function() {
     $("#holdError").hide();
@@ -152,6 +152,7 @@ $(document).ready(function() {
     player1.playerInit(inputP1);
     player2.playerInit(inputP2)
     displayScore();
+    newGame.diceRoller();
   });
 
 
