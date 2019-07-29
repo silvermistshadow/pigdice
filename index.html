@@ -23,22 +23,23 @@
           <label for="nameP2">Player 2:</label>
           <input type="text" class="form-control" id="nameP2">
         </div>
+        <button type="submit" class="btn btn-primary">Start game</button>
       </form>
 
       <div id="game">
         <div class="displayPlayers" id="player1">
-          TEST
+          <span id="p1Name"></span>  <span id="p1Score"></span>  <span id="p1Turns"></span>
           <br>
           <button type="button" class="btn btn-primary" id="rollP1">Roll</button>
           <button type="button" class="btn btn-success" id="holdP1">Hold</button>
         </div>
         <div class="displayPlayers" id="player2">
-          TEST
+          <span id="p2Name"></span>  <span id="p2Score"></span>  <span id="p2Turns"></span>
           <br>
           <button type="button" class="btn btn-primary" id="rollP2">Roll</button>
           <button type="button" class="btn btn-success" id="holdP2">Hold</button>
         </div>
-        <div class="holdError">
+        <div id="holdError">
           You have to roll at least once before holding.
         </div>
 

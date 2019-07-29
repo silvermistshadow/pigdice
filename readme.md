@@ -1,12 +1,12 @@
-# _{Application Name}_
+# _Pig dice_
 
-#### _{Brief description of application}, {Date of current version}_
+#### _A game of pig dice, 7-29-2019_
 
 #### By _**{List of contributors}**_
 
 ## Description
 
-_{This is a detailed description of your application. Its purpose and usage.  Give as much detail as needed to explain what the application does, and any other information you want users or other developers to have. }_
+_A game of pig dice. Currently supports two players by enabling and disabling certain buttons based on coded rules._
 
 **Basics:**
 Each turn, a player repeatedly rolls a dice until either a 1 is rolled or the player decides to "hold":
@@ -18,9 +18,10 @@ The first player to score 100 or more points wins.
 
 Design stages:
 0. Backend needs a random number generator (acquired)
-1. Dice rolling function calls the previous thing
-2. Establish game object, rules and prototypes
-3. Switch turns on certain conditions
+1. Dice rolling function calls the previous thing (done)
+2. Establish game object, rules and prototypes (probably done)
+3. Switch turns on certain conditions (done)
+4. Work on UI (in progress)
 
 
 ## Setup/Installation Requirements
