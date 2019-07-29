@@ -52,7 +52,14 @@ Game.prototype.diceRoller = function() {
   var turnScoreP1;
   var turnScoreP2;
   this.playerTurns();
-  $("#game").on("click", "button#rollP1", function() {
+  var anchorThis = this;
+  $("#game").on("click", "button#rollP1", rollP1());
+  $("#game").on("click", "button#holdP1", holdP1());
+  $("#game").on("click", "button#rollP2", rollP2());
+  $("#game").on("click", "button#holdP2", holdP2());
+};
+
+Game.prototype.rollP1 = function() {
     $("#holdError").hide();
     console.log("I want you to go in and go in and go in");
     var currentNum = getRandomIntInclusive(1, 6);
@@ -60,67 +67,67 @@ Game.prototype.diceRoller = function() {
         numRolledP1.push(currentNum);
     }
     else {
-        currentTurn = playerTurns.call(this.switchTurns());
+        currentTurn = this.playerTurns().switchTurns();
     }
-    });
-  $("#game").on("click", "button#holdP1", function() {
-    console.log("like the US Marshall and his three daughters");
-    if (numRolledP1.length >= 1) {
-      currentTurn = playerTurns.call(this.switchTurns());
-      player1.turns += 1;
-      turnScoreP1 = numRolledP1.reduce((a, b) => a + b, 0);
-      if (totalP1 >= 1) {
-        totalP1.push(turnScoreP1);
-        totalP1 = totalP1.reduce((a, b) => a + b, 0);
-        player1.score += totalP1;
-      }
-      else {
-        totalP1.push(turnScoreP1);
-        player1.score += totalP1;
-      }
-    }
-    else {
-      $("#holdError").show();
-    }
-    });
-  $("#game").on("click", "button#rollP2", function() {
+};
+
+Game.prototype.rollP2 = function() {
     $("#holdError").hide();
     var currentNum = getRandomIntInclusive(1, 6);
       if (currentNum !== 1) {
         numRolledP2.push(currentNum)
       }
       else {
-        currentTurn = switchTurns();
+        currentTurn = anchorThis.playerTurns().switchTurns();
       }
-    });
-  $("#game").on("click", "button#holdP2", function() {
-    if (numRolledP2.length >= 1) {
-      currentTurn = switchTurns();
-      player2.turns += 1;
-      turnScoreP2 = numRolledP2.reduce((a, b) => a + b, 0);
-      if (totalP2 >= 1) {
-          totalP2.push(turnScoreP2);
-          totalP2 = totalP2.reduce((a, b) => a + b, 0);
-          player2.score += totalP2;
-        }
-      else {
-          totalP2.push(turnScoreP2);
-          player2.score += totalP2;
-      }
-    }
-      else {
-        $("#holdError").show();
-
-      }
-    });
 };
 
+Game.prototype.holdP1 = function() {
+  console.log("like the US Marshall and his three daughters");
+  if (numRolledP1.length >= 1) {
+    currentTurn = anchorThis.playerTurns().switchTurns();
+    player1.turns += 1;
+    turnScoreP1 = numRolledP1.reduce((a, b) => a + b, 0);
+    if (totalP1 >= 1) {
+      totalP1.push(turnScoreP1);
+      totalP1 = totalP1.reduce((a, b) => a + b, 0);
+      player1.score += totalP1;
+    }
+    else {
+      totalP1.push(turnScoreP1);
+      player1.score += totalP1;
+    }
+  }
+  else {
+    $("#holdError").show();
+  }
+};
 
+Game.prototype.holdP2 = function() {
+  if (numRolledP2.length >= 1) {
+    currentTurn = anchorThis.playerTurns().switchTurns();
+    player2.turns += 1;
+    turnScoreP2 = numRolledP2.reduce((a, b) => a + b, 0);
+    if (totalP2 >= 1) {
+        totalP2.push(turnScoreP2);
+        totalP2 = totalP2.reduce((a, b) => a + b, 0);
+        player2.score += totalP2;
+      }
+    else {
+        totalP2.push(turnScoreP2);
+        player2.score += totalP2;
+    }
+  }
+    else {
+      $("#holdError").show();
+
+    }
+};
 Player.prototype.playerInit = function(name) {
   this.name = name;
   this.score = 0;
   this.turns = 0;
-}
+};
 
 var player1 = new Player();
 var player2 = new Player();
@@ -154,6 +161,5 @@ $(document).ready(function() {
     displayScore();
     newGame.diceRoller();
   });
-
 
 });
