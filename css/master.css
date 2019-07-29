@@ -10,7 +10,7 @@
 #player1 {
   border-color: blue;
   margin-left: 12px;
-  margin-right: 128px;
+  margin-right: 64px;
   margin-top: 16px;
   margin-bottom: 12px;
   padding-bottom: 6px;
@@ -18,7 +18,7 @@
 
 #player2 {
   border-color: red;
-  margin-left: 128px;
+  margin-left: 64px;
   margin-right: 12px;
   margin-top: 16px;
   margin-bottom: 12px;
@@ -28,5 +28,3 @@
 #holdError {
   display: none;
 }
-
-#
