@@ -78,11 +78,13 @@ Game.prototype.holdP1 = function () {
     player1.turns += 1;
     turnScoreP1 = numRolledP1.reduce((a, b) => a + b, 0);
     if (totalP1 >= 1) {
+      console.log("get pills against my orders");
       totalP1.push(turnScoreP1);
       totalP1 = totalP1.reduce((a, b) => a + b, 0);
       player1.score += totalP1;
     }
     else {
+      console.log("get moving!");
       totalP1.push(turnScoreP1);
       player1.score += totalP1;
     }
@@ -178,5 +180,5 @@ $(document).ready(function () {
     // $("#game").on("click", "button#rollP2", newGame.rollP2());
     // $("#game").on("click", "button#holdP2", newGame.holdP2());
   });
-
+  
 });
