@@ -77,18 +77,22 @@ Game.prototype.holdP1 = function () {
     currentTurn = this.playerTurns();
     player1.turns += 1;
     turnScoreP1 = numRolledP1.reduce((a, b) => a + b, 0);
+    console.log(turnScoreP1);
     if (totalP1 >= 1) {
       console.log("get pills against my orders");
       totalP1.push(turnScoreP1);
-      totalP1 = totalP1.reduce((a, b) => a + b, 0);
-      player1.score += totalP1;
+      var score = totalP1.reduce((a, b) => a + b, 0);
+      player1.score += score[0];
       console.log(player1.score);
+      score = [];
+      numRolledP1 = [];
     }
     else {
       console.log("get moving!");
       totalP1.push(turnScoreP1);
-      player1.score += totalP1;
+      player1.score += totalP1[0];
       console.log(player1.score);
+      numRolledP1 = [];
     }
   }
   else {
@@ -103,12 +107,15 @@ Game.prototype.holdP2 = function () {
     turnScoreP2 = numRolledP2.reduce((a, b) => a + b, 0);
     if (totalP2 >= 1) {
       totalP2.push(turnScoreP2);
-      totalP2 = totalP2.reduce((a, b) => a + b, 0);
-      player2.score += totalP2;
+      var score = totalP2.reduce((a, b) => a + b, 0);
+      player2.score += score[0];
+      score = [];
+      numRolledP2 = [];
     }
     else {
       totalP2.push(turnScoreP2);
-      player2.score += totalP2;
+      player2.score += totalP2[0];
+      numRolledP2 = [];
     }
   }
   else {
