@@ -82,11 +82,13 @@ Game.prototype.holdP1 = function () {
       totalP1.push(turnScoreP1);
       totalP1 = totalP1.reduce((a, b) => a + b, 0);
       player1.score += totalP1;
+      console.log(player1.score);
     }
     else {
       console.log("get moving!");
       totalP1.push(turnScoreP1);
       player1.score += totalP1;
+      console.log(player1.score);
     }
   }
   else {
