@@ -44,85 +44,89 @@ Game.prototype.playerTurns = function() {
   };
 };
 
-Game.prototype.diceRoller = function() {
-  var numRolledP1 = [];
-  var numRolledP2 = [];
-  var totalP1 = [];
-  var totalP2 = [];
-  var turnScoreP1;
-  var turnScoreP2;
-  this.playerTurns();
-  var anchorThis = this;
-  $("#game").on("click", "button#rollP1", rollP1());
-  $("#game").on("click", "button#holdP1", holdP1());
-  $("#game").on("click", "button#rollP2", rollP2());
-  $("#game").on("click", "button#holdP2", holdP2());
-};
+var numRolledP1 = [];
+var numRolledP2 = [];
+var totalP1 = [];
+var totalP2 = [];
+var turnScoreP1;
+var turnScoreP2;
 
 Game.prototype.rollP1 = function() {
-    $("#holdError").hide();
-    console.log("I want you to go in and go in and go in");
-    var currentNum = getRandomIntInclusive(1, 6);
-    if (currentNum !== 1) {
-        numRolledP1.push(currentNum);
-    }
-    else {
-        currentTurn = this.playerTurns().switchTurns();
-    }
+  $("#holdError").hide();
+  console.log("I want you to go in and go in and go in");
+  var currentNum = getRandomIntInclusive(1, 6);
+  if (currentNum !== 1) {
+      numRolledP1.push(currentNum);
+  }
+  else {
+      currentTurn = this.playerTurns().switchTurns();
+  }
 };
 
 Game.prototype.rollP2 = function() {
-    $("#holdError").hide();
-    var currentNum = getRandomIntInclusive(1, 6);
-      if (currentNum !== 1) {
-        numRolledP2.push(currentNum)
-      }
-      else {
-        currentTurn = anchorThis.playerTurns().switchTurns();
-      }
+  $("#holdError").hide();
+  var currentNum = getRandomIntInclusive(1, 6);
+    if (currentNum !== 1) {
+      numRolledP2.push(currentNum)
+    }
+    else {
+      currentTurn = anchorThis.playerTurns().switchTurns();
+    }
 };
 
 Game.prototype.holdP1 = function() {
-  console.log("like the US Marshall and his three daughters");
-  if (numRolledP1.length >= 1) {
-    currentTurn = anchorThis.playerTurns().switchTurns();
-    player1.turns += 1;
-    turnScoreP1 = numRolledP1.reduce((a, b) => a + b, 0);
-    if (totalP1 >= 1) {
-      totalP1.push(turnScoreP1);
-      totalP1 = totalP1.reduce((a, b) => a + b, 0);
-      player1.score += totalP1;
-    }
-    else {
-      totalP1.push(turnScoreP1);
-      player1.score += totalP1;
-    }
+console.log("like the US Marshall and his three daughters");
+if (numRolledP1.length >= 1) {
+  currentTurn = anchorThis.playerTurns().switchTurns();
+  player1.turns += 1;
+  turnScoreP1 = numRolledP1.reduce((a, b) => a + b, 0);
+  if (totalP1 >= 1) {
+    totalP1.push(turnScoreP1);
+    totalP1 = totalP1.reduce((a, b) => a + b, 0);
+    player1.score += totalP1;
   }
   else {
-    $("#holdError").show();
+    totalP1.push(turnScoreP1);
+    player1.score += totalP1;
   }
+}
+else {
+  $("#holdError").show();
+}
 };
 
 Game.prototype.holdP2 = function() {
-  if (numRolledP2.length >= 1) {
-    currentTurn = anchorThis.playerTurns().switchTurns();
-    player2.turns += 1;
-    turnScoreP2 = numRolledP2.reduce((a, b) => a + b, 0);
-    if (totalP2 >= 1) {
-        totalP2.push(turnScoreP2);
-        totalP2 = totalP2.reduce((a, b) => a + b, 0);
-        player2.score += totalP2;
-      }
-    else {
-        totalP2.push(turnScoreP2);
-        player2.score += totalP2;
+if (numRolledP2.length >= 1) {
+  currentTurn = anchorThis.playerTurns().switchTurns();
+  player2.turns += 1;
+  turnScoreP2 = numRolledP2.reduce((a, b) => a + b, 0);
+  if (totalP2 >= 1) {
+      totalP2.push(turnScoreP2);
+      totalP2 = totalP2.reduce((a, b) => a + b, 0);
+      player2.score += totalP2;
     }
+  else {
+      totalP2.push(turnScoreP2);
+      player2.score += totalP2;
   }
-    else {
-      $("#holdError").show();
+}
+  else {
+    $("#holdError").show();
 
-    }
+  }
 };
+
+Game.prototype.diceRoller = function() {
+  this.playerTurns();
+  var anchorThis = this;
+  console.log("diceRoller")
+  $("#game").on("click", "button#rollP1", anchorThis.rollP1());
+  $("#game").on("click", "button#holdP1", anchorThis.holdP1());
+  $("#game").on("click", "button#rollP2", anchorThis.rollP2());
+  $("#game").on("click", "button#holdP2", anchorThis.holdP2());
+};
+
+
 Player.prototype.playerInit = function(name) {
   this.name = name;
   this.score = 0;
