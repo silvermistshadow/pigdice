@@ -28,3 +28,7 @@
 #holdError {
   display: none;
 }
+
+#currentRoll {
+  font-size: 18px;
+}
