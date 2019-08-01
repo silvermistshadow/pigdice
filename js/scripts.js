@@ -89,7 +89,7 @@ Game.prototype.holdP1 = function () {
     player1.turns += 1;
     turnScoreP1 = parseInt(numRolledP1.reduce((a, b) => a + b, 0));
     console.log(turnScoreP1);
-    if (totalP1 >= 1) {
+    if (totalP1 >= 1)  {
       console.log("get pills against my orders");
       totalP1.push(turnScoreP1);
       var score = [parseInt(totalP1.reduce((a, b) => a + b, 0))];
@@ -97,6 +97,9 @@ Game.prototype.holdP1 = function () {
       console.log(player1.score);
       score = [];
       numRolledP1 = [];
+      if (player1.score >= 100) {
+        gameEnd(player1);
+      }
     }
     else {
       console.log("get moving!");
@@ -116,14 +119,17 @@ Game.prototype.holdP2 = function () {
     currentTurn = this.playerTurns();
     player2.turns += 1;
     turnScoreP2 = numRolledP2.reduce((a, b) => a + b, 0);
-    if (totalP2 >= 1) {
+    if ((totalP2 >= 1) && (totalP2 < 100)) {
       totalP2.push(turnScoreP2);
-      var score = totalP2.reduce((a, b) => a + b, 0);
-      player2.score += score[0];
+      var score = [totalP2.reduce((a, b) => a + b, 0)];
+      player2.score = score;
       score = [];
       numRolledP2 = [];
+      if (player2.score >= 100) {
+        gameEnd(player2);
+      }
     }
-    else {
+    else if (totalP2 === 0) {
       totalP2.push(turnScoreP2);
       player2.score += totalP2[0];
       numRolledP2 = [];
@@ -148,6 +154,10 @@ Player.prototype.playerInit = function (name) {
   this.name = name;
   this.score = 0;
   this.turns = 0;
+};
+
+function gameEnd(player) {
+  $("#gameEnd").html('Winner:' + player.name)
 };
 
 var player1 = new Player();
