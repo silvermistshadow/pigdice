@@ -1,5 +1,13 @@
 //Back end
 //this function is from a post on StackExchange
+var numRolledP1 = [];
+var numRolledP2 = [];
+var totalP1 = [];
+var totalP2 = [];
+var turnScoreP1;
+var turnScoreP2;
+var rolledThisTurn = [];
+
 function getRandomIntInclusive(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
@@ -26,6 +34,8 @@ Game.prototype.playerTurns = function () {
     $("button#rollP2").prop('disabled', false);
     $("button#holdP2").prop('disabled', false);
     console.log("I have opened the mayor");
+    displayScore();
+    rolledThisTurn = [];
     return currentTurn = "P2";
   } else if (currentTurn === "P2") {
     $("button#rollP2").prop('disabled', true);
@@ -33,6 +43,8 @@ Game.prototype.playerTurns = function () {
     $("button#rollP1").prop('disabled', false);
     $("button#holdP1").prop('disabled', false);
     console.log("When the power drops");
+    displayScore();
+    rolledThisTurn = [];
     return currentTurn = "P1";
   }
   else {
@@ -41,12 +53,7 @@ Game.prototype.playerTurns = function () {
 
 };
 
-var numRolledP1 = [];
-var numRolledP2 = [];
-var totalP1 = [];
-var totalP2 = [];
-var turnScoreP1;
-var turnScoreP2;
+
 
 Game.prototype.rollP1 = function () {
   $("#holdError").hide();
@@ -54,6 +61,8 @@ Game.prototype.rollP1 = function () {
   var currentNum = getRandomIntInclusive(1, 6);
   if (currentNum !== 1) {
     numRolledP1.push(currentNum);
+    rolledThisTurn.push(currentNum);
+    displayRoll();
   }
   else {
     currentTurn = this.playerTurns();
@@ -65,6 +74,8 @@ Game.prototype.rollP2 = function () {
   var currentNum = getRandomIntInclusive(1, 6);
   if (currentNum !== 1) {
     numRolledP2.push(currentNum)
+    rolledThisTurn.push(currentNum);
+    displayRoll();
   }
   else {
     currentTurn = this.playerTurns();
@@ -76,13 +87,13 @@ Game.prototype.holdP1 = function () {
   if (numRolledP1.length >= 1) {
     currentTurn = this.playerTurns();
     player1.turns += 1;
-    turnScoreP1 = numRolledP1.reduce((a, b) => a + b, 0);
+    turnScoreP1 = parseInt(numRolledP1.reduce((a, b) => a + b, 0));
     console.log(turnScoreP1);
     if (totalP1 >= 1) {
       console.log("get pills against my orders");
       totalP1.push(turnScoreP1);
-      var score = totalP1.reduce((a, b) => a + b, 0);
-      player1.score += score[0];
+      var score = [parseInt(totalP1.reduce((a, b) => a + b, 0))];
+      player1.score = score;
       console.log(player1.score);
       score = [];
       numRolledP1 = [];
@@ -153,6 +164,10 @@ function displayScore() {
   console.log("And we lose the vaccine");
 };
 
+function displayRoll() {
+  var rolledString = rolledThisTurn.toString();
+  $("#currentRoll").html('Rolled:' + ' ' +  rolledString);
+}
 
 $(document).ready(function () {
 
