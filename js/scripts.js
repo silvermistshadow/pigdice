@@ -97,7 +97,8 @@ Game.prototype.holdP1 = function () {
       console.log(player1.score);
       score = [];
       numRolledP1 = [];
-      if (player1.score >= 100) {
+      if (parseInt(player1.score[0]) >= 100) {
+        console.log("the most silent way to eliminate Manderly")
         gameEnd(player1);
       }
     }
@@ -125,7 +126,7 @@ Game.prototype.holdP2 = function () {
       player2.score = score;
       score = [];
       numRolledP2 = [];
-      if (player2.score >= 100) {
+      if (player2.score[0] >= 100) {
         gameEnd(player2);
       }
     }
@@ -157,7 +158,7 @@ Player.prototype.playerInit = function (name) {
 };
 
 function gameEnd(player) {
-  $("#gameEnd").html('Winner:' + player.name)
+  $("#gameEnd").html('Winner:' + player.name.toString());
 };
 
 var player1 = new Player();
