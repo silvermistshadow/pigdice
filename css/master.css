@@ -32,3 +32,8 @@
 #currentRoll {
   font-size: 18px;
 }
+
+#gameEnd {
+  font-size: 32px;
+  color: green;
+}
