@@ -85,7 +85,6 @@ Game.prototype.rollP2 = function () {
 Game.prototype.holdP1 = function () {
   console.log("like the US Marshall and his three daughters");
   if (numRolledP1.length >= 1) {
-    currentTurn = this.playerTurns();
     player1.turns += 1;
     turnScoreP1 = parseInt(numRolledP1.reduce((a, b) => a + b, 0));
     console.log(turnScoreP1);
@@ -113,13 +112,13 @@ Game.prototype.holdP1 = function () {
   else {
     $("#holdError").show();
   }
+  currentTurn = this.playerTurns();
 };
 
 Game.prototype.holdP2 = function () {
   if (numRolledP2.length >= 1) {
-    currentTurn = this.playerTurns();
     player2.turns += 1;
-    turnScoreP2 = numRolledP2.reduce((a, b) => a + b, 0);
+    turnScoreP2 = parseInt(numRolledP2.reduce((a, b) => a + b, 0));
     if (totalP2.length >= 1)  {
       console.log("get pills against my orders");
       totalP2.push(turnScoreP2);
@@ -133,16 +132,18 @@ Game.prototype.holdP2 = function () {
       }
       score = [];
     }
-    else if (totalP2 === 0) {
+    else {
+      console.log("get moving!");
       totalP2.push(turnScoreP2);
       player2.score += totalP2[0];
+      console.log(player2.score);
       numRolledP2 = [];
     }
   }
   else {
     $("#holdError").show();
-
   }
+  currentTurn = this.playerTurns();
 };
 
 Game.prototype.diceRoller = function () {
@@ -162,6 +163,10 @@ Player.prototype.playerInit = function (name) {
 
 function gameEnd(player) {
   $("#gameEnd").html('Winner:' + player.name.toString());
+  $("button#rollP2").prop('disabled', true);
+  $("button#holdP2").prop('disabled', true);
+  $("button#rollP1").prop('disabled', true);
+  $("button#holdP1").prop('disabled', true);
 };
 
 var player1 = new Player();
