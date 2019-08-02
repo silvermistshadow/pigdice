@@ -89,18 +89,18 @@ Game.prototype.holdP1 = function () {
     player1.turns += 1;
     turnScoreP1 = parseInt(numRolledP1.reduce((a, b) => a + b, 0));
     console.log(turnScoreP1);
-    if (totalP1 >= 1)  {
+    if (totalP1.length >= 1)  {
       console.log("get pills against my orders");
       totalP1.push(turnScoreP1);
       var score = [parseInt(totalP1.reduce((a, b) => a + b, 0))];
       player1.score = score;
       console.log(player1.score);
-      score = [];
       numRolledP1 = [];
-      if (parseInt(player1.score[0]) >= 100) {
+      if (score >= 100) {
         console.log("the most silent way to eliminate Manderly")
         gameEnd(player1);
       }
+      score = [];
     }
     else {
       console.log("get moving!");
@@ -120,15 +120,18 @@ Game.prototype.holdP2 = function () {
     currentTurn = this.playerTurns();
     player2.turns += 1;
     turnScoreP2 = numRolledP2.reduce((a, b) => a + b, 0);
-    if ((totalP2 >= 1) && (totalP2 < 100)) {
+    if (totalP2.length >= 1)  {
+      console.log("get pills against my orders");
       totalP2.push(turnScoreP2);
-      var score = [totalP2.reduce((a, b) => a + b, 0)];
+      var score = [parseInt(totalP2.reduce((a, b) => a + b, 0))];
       player2.score = score;
-      score = [];
+      console.log(player2.score);
       numRolledP2 = [];
-      if (player2.score[0] >= 100) {
+      if (score >= 100) {
+        console.log("the most silent way to eliminate Manderly")
         gameEnd(player2);
       }
+      score = [];
     }
     else if (totalP2 === 0) {
       totalP2.push(turnScoreP2);
